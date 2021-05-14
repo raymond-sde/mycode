@@ -6,21 +6,27 @@ import requests
 
 def main():
     pokemon_name = input("Name a pokemon\n>")
-    pokeapi = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}").json()
 
-    img_url = pokeapi["sprites"]["front_default"]
-    img_data = requests.get(img_url).content
+    try:
+        pokeapi = requests.get(
+            f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+        ).json()
 
-    with open(f"{pokemon_name}.png", "wb") as out_file:
-        out_file.write(img_data)
+        img_url = pokeapi["sprites"]["front_default"]
+        img_data = requests.get(img_url).content
 
-    print("URL: ", img_url)
-    print("Game Indices Count: ", len(pokeapi["game_indices"]))
+        with open(f"{pokemon_name}.png", "wb") as out_file:
+            out_file.write(img_data)
 
-    print("All Moves:")
+        print("URL: ", img_url)
+        print("Game Indices Count: ", len(pokeapi["game_indices"]))
 
-    for pokedict in pokeapi["moves"]:
-        print(pokedict["move"]["name"])
+        print("All Moves:")
+
+        for pokedict in pokeapi["moves"]:
+            print(pokedict["move"]["name"])
+    except:
+        print("Invalid pokemon name")
 
 
 main()
