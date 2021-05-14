@@ -17,6 +17,8 @@ def main():
     print("URL: ", img_url)
     print("Game Indices Count: ", len(pokeapi["game_indices"]))
 
+    print("All Moves:")
+
     for pokedict in pokeapi["moves"]:
         print(pokedict["move"]["name"])
 
