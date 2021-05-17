@@ -2,11 +2,6 @@
 
 import pandas as pd
 
-# these following two lines are for writing to file
-# use this when you are not rendering to a window
-import matplotlib
-matplotlib.use('Agg')
-
 # create some graphs
 import matplotlib.pyplot as plt
 
@@ -44,14 +39,6 @@ def main():
     # number of rows and columns (5042, 24)
     print(movies.shape)
 
-    # unfortunately our data has some duplicates in it
-    # we can remove them quickly with the .drop_duplicates() method
-    # this returns a dataframe, or None if .drop_duplicates(inplace=True)
-    movies.drop_duplicates(inplace=True)
-    
-    # take a peek at how our dataframe changed after removing duplicates
-    print(movies.shape)
-    
     # sort DataFrame based on Gross Earnings
     sorted_by_gross = movies.sort_values(["Gross Earnings"], ascending=False)
 
@@ -63,15 +50,7 @@ def main():
     # create a stacked bar graph
     sorted_by_gross['Gross Earnings'].head(10).plot(kind="barh")
     # save the figure as stackedbar.png
-    plt.savefig("/home/student/static/stackedbar.png", bbox_inches='tight')
-
-    # save as json
-    movies.reset_index(inplace=True)
-    movies.to_json('myjson.json')
-
-    # save as csv
-    movies.to_csv('mycsv.csv')
+    plt.savefig("stackedbar.png")
 
 if __name__ == "__main__":
     main()
-
