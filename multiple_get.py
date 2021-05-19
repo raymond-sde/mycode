@@ -19,17 +19,9 @@ def main():
 
         # The name(s) of books the character appeared in
         books = [requests.get(book).json()['name'] for book in got_dj['books']]
-        # books = ""
-        # for book in got_dj['books']:
-        #     bookresp = requests.get(book).json()
-        #     books += bookresp['name']
 
         # The name(s) of allegiances the character has (if any)
         allegiances = [requests.get(allegiance).json()['name'] for allegiance in got_dj['allegiances']]
-        # allegiances = ""
-        # for allegiance in got_dj['allegiances']:
-        #     allegianceresp = requests.get(allegiance).json()
-        #     allegiances += allegianceresp['name']
 
         print(f"The name of the character: {name}")
         print(f"The name(s) of books the character appeared in: {', '.join(books)}")
